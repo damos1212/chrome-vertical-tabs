@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Vertical Tabs",
+  "description": "Vertical tab list in the side panel.",
+  "version": "0.1.0",
+  "permissions": ["tabs", "sidePanel", "storage"],
+  "action": {
+    "default_title": "Tabs"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  }
+}

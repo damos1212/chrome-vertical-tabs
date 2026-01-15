@@ -1,0 +1,326 @@
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg-base: #f4f6fb;
+  --bg-soft: #eef1f8;
+  --panel: rgba(255, 255, 255, 0.9);
+  --text: #1f2a36;
+  --muted: #5a6877;
+  --border: #d6dbe5;
+  --hover: #eef3fb;
+  --active: #dde7f5;
+  --accent: #2563eb;
+  --shadow: 0 10px 20px rgba(30, 41, 59, 0.12);
+  --shadow-soft: 0 6px 14px rgba(30, 41, 59, 0.1);
+  --item-bg: rgba(255, 255, 255, 0.85);
+  --item-border: rgba(37, 99, 235, 0.18);
+  --favicon-bg: #d8deea;
+  --pattern: rgba(37, 99, 235, 0.08);
+  --badge-audible-bg: rgba(37, 99, 235, 0.18);
+  --badge-audible-text: #2563eb;
+  --badge-muted-bg: rgba(220, 38, 38, 0.16);
+  --badge-muted-text: #dc2626;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-base: #0f1115;
+  --bg-soft: #171a21;
+  --panel: rgba(23, 26, 33, 0.9);
+  --text: #e6e9ef;
+  --muted: #9aa3b2;
+  --border: #2a2f3a;
+  --hover: #1f2430;
+  --active: #2a3242;
+  --accent: #7aa2f7;
+  --shadow: 0 10px 20px rgba(8, 10, 14, 0.45);
+  --shadow-soft: 0 6px 14px rgba(8, 10, 14, 0.35);
+  --item-bg: rgba(23, 26, 33, 0.8);
+  --item-border: rgba(122, 162, 247, 0.2);
+  --favicon-bg: #2a2f3a;
+  --pattern: rgba(122, 162, 247, 0.08);
+  --badge-audible-bg: rgba(122, 162, 247, 0.2);
+  --badge-audible-text: #7aa2f7;
+  --badge-muted-bg: rgba(255, 107, 138, 0.2);
+  --badge-muted-text: #ff6b8a;
+}
+
+:root[data-theme="catppuccin"] {
+  color-scheme: dark;
+  --bg-base: #1e1e2e;
+  --bg-soft: #181825;
+  --panel: rgba(30, 30, 46, 0.88);
+  --text: #cdd6f4;
+  --muted: #a6adc8;
+  --border: #313244;
+  --hover: #26283a;
+  --active: #313244;
+  --accent: #cba6f7;
+  --shadow: 0 10px 20px rgba(17, 17, 27, 0.38);
+  --shadow-soft: 0 6px 14px rgba(17, 17, 27, 0.3);
+  --item-bg: rgba(30, 30, 46, 0.75);
+  --item-border: rgba(203, 166, 247, 0.2);
+  --favicon-bg: #2f2f46;
+  --pattern: rgba(203, 166, 247, 0.08);
+  --badge-audible-bg: rgba(203, 166, 247, 0.18);
+  --badge-audible-text: #cba6f7;
+  --badge-muted-bg: rgba(243, 139, 168, 0.18);
+  --badge-muted-text: #f38ba8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-width: 0;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Trebuchet MS", "Gill Sans", "Candara", sans-serif;
+  color: var(--text);
+  background-image:
+    radial-gradient(circle at top right, var(--bg-soft), var(--bg-base) 55%),
+    repeating-linear-gradient(
+      120deg,
+      var(--pattern),
+      var(--pattern) 1px,
+      transparent 1px,
+      transparent 16px
+    );
+  background-attachment: fixed;
+}
+
+.app-main {
+  padding: 12px 10px 20px;
+  transition: padding 150ms ease;
+}
+
+body.has-selection .app-main {
+  padding-bottom: 72px;
+}
+
+.tab-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--item-border);
+  background: var(--item-bg);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  min-width: 0;
+  transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+  animation: tab-rise 180ms ease both;
+  animation-delay: calc(var(--index, 0) * 18ms);
+}
+
+.tab-item:hover {
+  background: var(--hover);
+  border-color: var(--border);
+}
+
+.tab-item.active {
+  background: var(--active);
+  border-color: var(--accent);
+}
+
+.tab-item.selected {
+  background: var(--hover);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.tab-item.dragging {
+  opacity: 0.5;
+}
+
+.tab-item.drop-above {
+  border-top: 2px solid var(--accent);
+}
+
+.tab-item.drop-below {
+  border-bottom: 2px solid var(--accent);
+}
+
+.tab-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.favicon {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background-color: var(--favicon-bg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex: 0 0 auto;
+}
+
+.tab-title {
+  font-size: 13px;
+  line-height: 1.25;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.badge-audible {
+  background: var(--badge-audible-bg);
+  color: var(--badge-audible-text);
+}
+
+.badge-muted {
+  background: var(--badge-muted-bg);
+  color: var(--badge-muted-text);
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 40px;
+}
+
+.selection-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.selection-bar.hidden {
+  display: none;
+}
+
+.selection-count {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.selection-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.selection-btn {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  background: var(--item-bg);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.selection-btn-primary {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@keyframes tab-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab-item {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 260px) {
+  .app-main {
+    padding: 10px 8px 16px;
+  }
+
+  .tab-item {
+    padding: 6px 8px;
+    gap: 8px;
+  }
+
+  .tab-title {
+    font-size: 12px;
+  }
+
+  .favicon {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 200px) {
+  .tab-actions {
+    display: none;
+  }
+
+  .selection-actions {
+    gap: 6px;
+  }
+
+  .selection-btn {
+    padding: 5px 8px;
+  }
+}

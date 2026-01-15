@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vertical Tabs Settings</title>
+    <script src="theme-init.js"></script>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main class="settings">
+      <header class="settings-header">
+        <div>
+          <h1>Theme</h1>
+          <p>Choose how the vertical tabs panel looks.</p>
+        </div>
+      </header>
+      <section class="settings-card" aria-label="Theme selection">
+        <div class="field">
+          <label for="theme-select">Theme</label>
+          <select id="theme-select">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="catppuccin">Catppuccin</option>
+          </select>
+        </div>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </section>
+      <section class="preview" aria-label="Theme preview">
+        <div class="preview-title">Preview</div>
+        <ul class="preview-list">
+          <li class="preview-item active">
+            <span class="preview-icon"></span>
+            <span class="preview-text">Current tab</span>
+            <span class="preview-badge">A</span>
+          </li>
+          <li class="preview-item">
+            <span class="preview-icon"></span>
+            <span class="preview-text">Second tab</span>
+          </li>
+          <li class="preview-item muted">
+            <span class="preview-icon"></span>
+            <span class="preview-text">Muted tab</span>
+            <span class="preview-badge muted">M</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>
